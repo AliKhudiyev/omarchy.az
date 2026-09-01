@@ -1,0 +1,407 @@
+<!doctype html>
+<!--
+  omarchy.az — domain for sale
+
+  ┌─ BEFORE THIS GOES LIVE ────────────────────────────────────────────┐
+  │ The contact form will NOT work until you paste in an access key.   │
+  │                                                                     │
+  │ 1. Go to https://web3forms.com                                      │
+  │ 2. Enter your email, they mail you an access key (no signup)        │
+  │ 3. Replace WEB3FORMS_ACCESS_KEY below with that key                 │
+  │                                                                     │
+  │ The key is public in page source by design — it only permits        │
+  │ sending mail to the address you registered. It is not a secret.     │
+  └─────────────────────────────────────────────────────────────────────┘
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>omarchy.az is for sale</title>
+<meta name="description" content="The domain omarchy.az is for sale. $4,000 USD or best offer.">
+<meta name="theme-color" content="#0d0e12">
+<meta property="og:type" content="website">
+<meta property="og:title" content="omarchy.az is for sale">
+<meta property="og:description" content="$4,000 USD or best offer. Transfer via escrow available.">
+<meta property="og:url" content="https://omarchy.az/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230d0e12'/><text x='50' y='70' font-size='60' font-family='ui-monospace,monospace' fill='%239ece6a' text-anchor='middle'>%24</text></svg>">
+<style>
+  :root {
+    --bg:      #0d0e12;
+    --surface: #14161d;
+    --border:  #262a36;
+    --text:    #e4e6eb;
+    --muted:   #8b90a0;
+    --accent:  #7aa2f7;
+    --money:   #9ece6a;
+    --danger:  #f7768e;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    /* faint glow behind the fold, keeps the flat black from feeling dead */
+    background-image: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(122,162,247,.10), transparent 70%);
+    background-repeat: no-repeat;
+  }
+
+  .wrap {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 8vw, 5rem) 1.25rem 3rem;
+  }
+
+  /* ---- masthead ---- */
+
+  .prompt {
+    font-family: var(--mono);
+    font-size: .8125rem;
+    color: var(--muted);
+    margin: 0 0 1.75rem;
+    letter-spacing: .01em;
+  }
+  .prompt .sigil { color: var(--money); }
+
+  h1 {
+    font-family: var(--mono);
+    font-size: clamp(2.1rem, 9vw, 3.75rem);
+    font-weight: 600;
+    letter-spacing: -.02em;
+    line-height: 1.1;
+    margin: 0;
+    /* the domain is the loudest thing on the page; never let it wrap mid-word */
+    overflow-wrap: break-word;
+  }
+  h1 .tld { color: var(--accent); }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    margin-top: 1.25rem;
+    padding: .3rem .7rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    font-family: var(--mono);
+    font-size: .75rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .status .dot {
+    width: .5rem; height: .5rem;
+    border-radius: 50%;
+    background: var(--money);
+    box-shadow: 0 0 0 3px rgba(158,206,106,.18);
+  }
+
+  /* ---- price ---- */
+
+  .price-card {
+    margin: 2.5rem 0;
+    padding: 1.5rem 1.5rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+  .price {
+    font-family: var(--mono);
+    font-size: clamp(2rem, 7vw, 2.75rem);
+    font-weight: 600;
+    color: var(--money);
+    letter-spacing: -.02em;
+    line-height: 1.15;
+  }
+  .price .cur { color: var(--muted); font-size: .45em; font-weight: 500; margin-left: .5rem; letter-spacing: .05em; }
+  .price-note { color: var(--muted); font-size: .9375rem; margin-top: .25rem; }
+
+  /* ---- facts ---- */
+
+  h2 {
+    font-family: var(--mono);
+    font-size: .8125rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--muted);
+    margin: 0 0 1rem;
+  }
+
+  .facts { list-style: none; padding: 0; margin: 0 0 3rem; }
+  .facts li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: .6rem;
+    color: var(--text);
+  }
+  .facts li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--mono);
+  }
+  .facts .muted { color: var(--muted); }
+
+  /* ---- form ---- */
+
+  form { display: grid; gap: 1rem; }
+
+  .row { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
+  @media (max-width: 34rem) { .row { grid-template-columns: 1fr; } }
+
+  .field { display: grid; gap: .375rem; }
+
+  label {
+    font-family: var(--mono);
+    font-size: .75rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  label .opt { text-transform: none; letter-spacing: 0; }
+
+  input, textarea {
+    width: 100%;
+    padding: .7rem .8rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.5;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(122,162,247,.18);
+  }
+  textarea { resize: vertical; min-height: 6.5rem; }
+
+  button {
+    justify-self: start;
+    padding: .7rem 1.4rem;
+    border: 0;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #0b0d13;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity .15s, transform .05s;
+  }
+  button:hover:not(:disabled) { opacity: .9; }
+  button:active:not(:disabled) { transform: translateY(1px); }
+  button:disabled { opacity: .55; cursor: progress; }
+
+  /* honeypot — hidden from people, visible to naive bots */
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px; height: 1px;
+    overflow: hidden;
+  }
+
+  /* ---- form result states ---- */
+
+  .result {
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+  .result.ok    { border-color: rgba(158,206,106,.4); }
+  .result.error { border-color: rgba(247,118,142,.4); }
+  .result h3 {
+    margin: 0 0 .35rem;
+    font-family: var(--mono);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .result.ok h3    { color: var(--money); }
+  .result.error h3 { color: var(--danger); }
+  .result p { margin: 0; color: var(--muted); font-size: .9375rem; }
+  .result button {
+    margin-top: .9rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: .875rem;
+    padding: .45rem 1rem;
+  }
+  [hidden] { display: none !important; }
+
+  /* ---- footer ---- */
+
+  footer {
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: .875rem;
+  }
+  footer a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+  footer a:hover { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="prompt"><span class="sigil">$</span> whois omarchy.az</p>
+
+  <header>
+    <h1>omarchy<span class="tld">.az</span></h1>
+    <div class="status"><span class="dot"></span> For sale</div>
+  </header>
+
+  <div class="price-card">
+    <div class="price">$4,000<span class="cur">USD</span></div>
+    <p class="price-note">or best offer — reasonable offers will be considered.</p>
+  </div>
+
+  <h2>About this domain</h2>
+  <ul class="facts">
+    <li>Exact match for <strong>Omarchy</strong>, the Arch Linux setup at omarchy.org.</li>
+    <li><code>.az</code> is Azerbaijan's country-code TLD.</li>
+    <li>Seven characters. One word, no hyphens, no numbers.</li>
+    <li class="muted">Registered new and never used — no parking history, no prior owner, nothing to clean up.</li>
+  </ul>
+
+  <h2>Make an offer</h2>
+
+  <form id="contact-form" novalidate>
+    <!-- Replace with your key from https://web3forms.com — the form is inert until you do. -->
+    <input type="hidden" name="access_key" value="WEB3FORMS_ACCESS_KEY">
+    <input type="hidden" name="subject" value="omarchy.az — offer from the sale page">
+    <input type="hidden" name="from_name" value="omarchy.az">
+
+    <div class="hp" aria-hidden="true">
+      <label for="botcheck">Leave this field empty</label>
+      <input type="text" id="botcheck" name="botcheck" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required autocomplete="email">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="offer">Your offer <span class="opt">(USD, optional)</span></label>
+      <input type="text" inputmode="numeric" id="offer" name="offer" placeholder="4000">
+    </div>
+
+    <div class="field">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required placeholder="Who you are and what you'd use the domain for."></textarea>
+    </div>
+
+    <button type="submit" id="submit-btn">Send offer</button>
+  </form>
+
+  <div class="result ok" id="result-ok" hidden>
+    <h3>Offer sent</h3>
+    <p>Thanks — I'll get back to you within 24 hours.</p>
+  </div>
+
+  <div class="result error" id="result-error" hidden>
+    <h3>Couldn't send that</h3>
+    <!-- Optional: add a fallback contact here (Telegram, GitHub) in case the form backend is down. -->
+    <p id="error-detail">Something went wrong on the way out. Please try again in a moment.</p>
+    <button type="button" id="retry-btn">Try again</button>
+  </div>
+
+  <footer>
+    <p>Registered through <a href="https://online.az" rel="noopener nofollow">online.az</a>. Transfer can be completed through
+    <a href="https://www.escrow.com" rel="noopener nofollow">escrow.com</a> if you'd prefer to use an escrow service.</p>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var form     = document.getElementById('contact-form');
+  var btn      = document.getElementById('submit-btn');
+  var okBox    = document.getElementById('result-ok');
+  var errBox   = document.getElementById('result-error');
+  var errText  = document.getElementById('error-detail');
+  var retryBtn = document.getElementById('retry-btn');
+
+  var ENDPOINT = 'https://api.web3forms.com/submit';
+  var idle = 'Send offer';
+
+  function show(el) { el.hidden = false; }
+  function hide(el) { el.hidden = true; }
+
+  retryBtn.addEventListener('click', function () {
+    hide(errBox);
+    show(form);
+    form.querySelector('input[name="name"]').focus();
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // Let the browser surface its own validation messages rather than rolling our own.
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    var data = Object.fromEntries(new FormData(form).entries());
+
+    if (data.access_key === 'WEB3FORMS_ACCESS_KEY') {
+      hide(form);
+      errText.textContent = 'This form is not connected yet — the site owner still needs to add a Web3Forms access key.';
+      show(errBox);
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(function (res) {
+        return res.json().catch(function () { return {}; }).then(function (body) {
+          if (!res.ok || body.success === false) {
+            throw new Error(body.message || ('Request failed with status ' + res.status));
+          }
+        });
+      })
+      .then(function () {
+        hide(form);
+        show(okBox);
+      })
+      .catch(function (err) {
+        hide(form);
+        errText.textContent = 'Something went wrong on the way out (' + err.message + '). Please try again in a moment.';
+        show(errBox);
+      })
+      .finally(function () {
+        btn.disabled = false;
+        btn.textContent = idle;
+      });
+  });
+})();
+</script>
+</body>
+</html>
