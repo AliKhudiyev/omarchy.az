@@ -2,50 +2,87 @@
 
 Domain-for-sale landing page. Single static HTML file, no build step, no dependencies.
 
-## Before it works
+Live at <https://omarchy.az>.
 
-The contact form is inert until you add a Web3Forms access key:
+## Who does what
 
-1. Go to <https://web3forms.com> and enter your email — they mail you a key, no account needed.
-2. In `index.html`, replace `WEB3FORMS_ACCESS_KEY` with that key.
-3. Commit and push.
+Four services are involved. Knowing which is which saves a lot of time when
+something breaks:
 
-Until then the form shows an explicit "not connected yet" message rather than
-failing silently. The key is public in page source by design — it only permits
-sending mail to the address you registered with.
+| Service | Role |
+|---|---|
+| **online.az** | Registrar. Holds the registration and the **nameserver delegation only**. |
+| **deSEC** (desec.io) | DNS zone. The A and CNAME records actually live here. |
+| **GitHub Pages** | Hosting, served from `main` in this repo. |
+| **Web3Forms** | Contact-form backend. Emails each submission. |
 
-## Hosting — GitHub Pages
+The easy mistake: **there are no DNS records at online.az.** It only points the
+domain at deSEC's nameservers. Go to deSEC to change anything about resolution.
+
+## DNS
+
+**At online.az** — nameserver delegation only:
+
+    ns1.desec.io
+    ns2.desec.org
+
+**At deSEC** — the actual zone:
+
+| Subname | Type | TTL | Records |
+|---|---|---|---|
+| *(empty)* | `A` | 3600 | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` |
+| `www` | `CNAME` | 3600 | `AliKhudiyev.github.io.` |
+
+Empty subname is the apex. The four A records are GitHub's redundant Pages
+servers — all four, not alternatives. Pointing `www` at `AliKhudiyev.github.io.`
+is correct even though other Pages sites use the same target; GitHub routes on
+the request's host, matched against the `CNAME` file in each repo.
+
+## Hosting
 
 Repo must be **public** (Pages from a private repo requires a paid plan).
 
-**Settings → Pages:** source `main`, folder `/ (root)`, custom domain `omarchy.az`.
-Once the certificate is issued, tick **Enforce HTTPS**. Issuance can take up to
-24 hours; the site is reachable over plain HTTP before then.
+**Settings → Pages:** source `main`, folder `/ (root)`, custom domain
+`omarchy.az`, **Enforce HTTPS** on.
 
-The `CNAME` file in this repo is what GitHub matches incoming requests against —
-that is how this site is told apart from any other Pages site on the account.
+## Certificate
 
-## DNS — set at online.az
+Nothing to do. GitHub issues and **auto-renews** a Let's Encrypt certificate.
+Those are 90-day certs, renewed automatically well before expiry — the date you
+see in a browser is not a deadline.
 
-Four **A** records on the apex (`@`):
+Renewal validates over HTTP through the domain, so it only fails if resolution
+breaks first: delegation removed at online.az, the zone deleted at deSEC, or the
+A records changed. Fix DNS and the certificate recovers on its own.
 
-    185.199.108.153
-    185.199.109.153
-    185.199.110.153
-    185.199.111.153
+The real expiry risk is **the domain registration at online.az**, not the
+certificate. If that lapses, everything stops.
 
-One **CNAME** for `www`:
+## Contact form
 
-    www  ->  AliKhudiyev.github.io.
-
-Pointing `www` at the same `AliKhudiyev.github.io` target as any other Pages site
-is correct and expected — routing is decided by the `CNAME` file, not the DNS target.
+Wired to Web3Forms. The access key is the hidden `access_key` input in
+`index.html`. It is public by design — it only permits sending mail to the
+address it was registered with, so it is safe in a public repo. Regenerate it at
+web3forms.com if it ever starts attracting spam.
 
 ## Verify
 
-    dig omarchy.az +short          # expect the four IPs above
-    dig www.omarchy.az +short      # expect the CNAME
-    curl -sI https://omarchy.az    # expect 200, valid cert
+    dig omarchy.az NS +short              # expect ns1.desec.io, ns2.desec.org
+    dig @ns1.desec.io omarchy.az A +short # expect the four GitHub IPs
+    dig omarchy.az A +short               # expect the same, via public resolvers
+    curl -sI https://omarchy.az           # expect HTTP/2 200
+
+## If it breaks
+
+| Symptom | Likely cause |
+|---|---|
+| `dig omarchy.az NS` empty | Delegation lost at online.az |
+| deSEC returns `REFUSED` | Zone deleted at deSEC |
+| Resolves, but `404` | Custom domain or `CNAME` file changed |
+| Works elsewhere, not for you | Local DNS cache. `sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder` |
+
+That last one is more common than it sounds — router, VPN, and macOS each cache
+independently, and a negative (`NXDOMAIN`) answer can persist for hours.
 
 ## Local preview
 
