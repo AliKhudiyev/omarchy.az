@@ -7,7 +7,7 @@
   │                                                                     │
   │ 1. Go to https://web3forms.com                                      │
   │ 2. Enter your email, they mail you an access key (no signup)        │
-  │ 3. Replace WEB3FORMS_ACCESS_KEY below with that key                 │
+  │ 3. Replace 387a42ab-2994-489d-ac3a-ee8d876edb3a below with that key                 │
   │                                                                     │
   │ The key is public in page source by design — it only permits        │
   │ sending mail to the address you registered. It is not a secret.     │
@@ -284,7 +284,7 @@
 
   <form id="contact-form" novalidate>
     <!-- Replace with your key from https://web3forms.com — the form is inert until you do. -->
-    <input type="hidden" name="access_key" value="WEB3FORMS_ACCESS_KEY">
+    <input type="hidden" name="access_key" value="387a42ab-2994-489d-ac3a-ee8d876edb3a">
     <input type="hidden" name="subject" value="omarchy.az — offer from the sale page">
     <input type="hidden" name="from_name" value="omarchy.az">
 
@@ -365,7 +365,7 @@
 
     var data = Object.fromEntries(new FormData(form).entries());
 
-    if (data.access_key === 'WEB3FORMS_ACCESS_KEY') {
+    if (data.access_key === '387a42ab-2994-489d-ac3a-ee8d876edb3a') {
       hide(form);
       errText.textContent = 'This form is not connected yet — the site owner still needs to add a Web3Forms access key.';
       show(errBox);
