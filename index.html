@@ -2,16 +2,10 @@
 <!--
   omarchy.az — domain for sale
 
-  ┌─ BEFORE THIS GOES LIVE ────────────────────────────────────────────┐
-  │ The contact form will NOT work until you paste in an access key.   │
-  │                                                                     │
-  │ 1. Go to https://web3forms.com                                      │
-  │ 2. Enter your email, they mail you an access key (no signup)        │
-  │ 3. Replace 387a42ab-2994-489d-ac3a-ee8d876edb3a below with that key                 │
-  │                                                                     │
-  │ The key is public in page source by design — it only permits        │
-  │ sending mail to the address you registered. It is not a secret.     │
-  └─────────────────────────────────────────────────────────────────────┘
+  Contact form is wired to Web3Forms. The access_key below is public by
+  design: it only permits sending mail to the address it was registered
+  with, so it is safe in a public repo. Regenerate it at web3forms.com if
+  you ever start getting spam through it.
 -->
 <html lang="en">
 <head>
@@ -364,13 +358,6 @@
     if (!form.checkValidity()) { form.reportValidity(); return; }
 
     var data = Object.fromEntries(new FormData(form).entries());
-
-    if (data.access_key === '387a42ab-2994-489d-ac3a-ee8d876edb3a') {
-      hide(form);
-      errText.textContent = 'This form is not connected yet — the site owner still needs to add a Web3Forms access key.';
-      show(errBox);
-      return;
-    }
 
     btn.disabled = true;
     btn.textContent = 'Sending…';
